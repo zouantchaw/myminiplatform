@@ -9,7 +9,7 @@ const title =
   "myminiplatform - The all in one platform for personal and business use";
 const description =
   "myminiplatform is a platform that allows you to create your own personal or business website, blog, store, and more. It's free to use and easy to get started.";
-const image = "https://vercel.pub/thumbnail.png";
+const image = "/myminiplatform.png";
 
 export const metadata: Metadata = {
   title,
