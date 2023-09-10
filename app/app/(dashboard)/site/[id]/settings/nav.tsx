@@ -15,6 +15,11 @@ export default function SiteSettingsNav() {
       segment: null,
     },
     {
+      name: "Navigation",
+      href: `/site/${id}/settings/navigation`,
+      segment: "navigation",
+    },
+    {
       name: "Domains",
       href: `/site/${id}/settings/domains`,
       segment: "domains",
@@ -25,7 +30,7 @@ export default function SiteSettingsNav() {
       segment: "appearance",
     },
   ];
-
+ 
   return (
     <div className="flex space-x-4 border-b border-stone-200 pb-4 pt-2 dark:border-stone-700">
       {navItems.map((item) => (

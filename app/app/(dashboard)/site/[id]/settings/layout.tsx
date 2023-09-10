@@ -45,7 +45,7 @@ export default async function SiteAnalyticsLayout({
         >
           {url} ↗
         </a>
-      </div>
+      </div> 
       <SiteSettingsNav />
       {children}
     </>
