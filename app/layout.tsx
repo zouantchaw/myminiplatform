@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import Script from 'next/script';
 
 const title =
   "myminiplatform - The all in one platform for personal and business use";
@@ -32,20 +33,17 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://vercel.pub"),
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
+        <Script
           defer
           src="https://unpkg.com/@tinybirdco/flock.js"
+          strategy="afterInteractive"
           data-host="https://api.us-east.tinybird.co"
           data-token="p.eyJ1IjogIjEyN2U5NWY5LTJlODEtNDViMC1iM2M5LTMwYTZlYzY2OWNjZiIsICJpZCI6ICIzYzBiNTFhYy0xZDNiLTRjNzctOWJhMi04Zjg1ODJiNGNlNDAiLCAiaG9zdCI6ICJ1c19lYXN0In0.r7C0bxRrDtgZ0atJmi1S7IfuXxtxvvoQxfLxdyPq3hk"
-        ></script>
+        />
       </head>
       <body className={cn(cal.variable, inter.variable)}>
         <Providers>
