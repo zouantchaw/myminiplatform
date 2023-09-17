@@ -10,7 +10,7 @@ export default function SiteSettingsNav() {
 
   const navItems = [
     {
-      name: "General",
+      name: "General", 
       href: `/site/${id}/settings`,
       segment: null,
     },

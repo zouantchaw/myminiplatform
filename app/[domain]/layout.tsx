@@ -8,6 +8,7 @@ import { notFound, redirect } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
 import { fontMapper } from "@/styles/fonts";
 import { Metadata } from "next";
+import { TabGroup, TabList, Tab } from "@tremor/react";
 
 export async function generateMetadata({
   params,
@@ -106,8 +107,8 @@ export default async function SiteLayout({
 
   return (
     <div className={fontMapper[data.font]}>
-      <div className="ease left-0 right-0 top-0 z-30 flex h-16 bg-white transition-all duration-150 dark:bg-black dark:text-white">
-        <div className="mx-auto flex h-full max-w-screen-xl items-center justify-center space-x-5 px-10 sm:px-20">
+      <div className="ease left-0 right-0 top-0 z-30 flex flex-col h-auto bg-white transition-all duration-150 dark:bg-black dark:text-white">
+        <div className="mx-auto flex max-w-screen-xl items-center justify-between space-x-5 px-10 sm:px-20 py-4">
           <Link href="/" className="flex items-center justify-center">
             <div className="inline-block h-8 w-8 overflow-hidden rounded-full align-middle">
               <Image
@@ -122,6 +123,26 @@ export default async function SiteLayout({
             </span>
           </Link>
         </div>
+
+        {/* Navigation Tabs */}
+        {data.navigation && data.navigation.length > 0 && (
+          <TabGroup className="mx-auto max-w-screen-xl mb-4">
+            <TabList className="flex justify-center space-x-8 py-2">
+              {data.navigation.map((navItem, index) => (
+                <Tab
+                  key={index}
+                  className="rounded-lg px-6 py-2 text-gray-700 min-w-32 transition duration-200 hover:bg-gray-300 active:bg-gray-400"
+                >
+                  {navItem.link.startsWith('https') || navItem.link.startsWith('www') ? (
+                    <Link href={navItem.link} target="_blank" rel="noopener noreferrer">{navItem.name}</Link>
+                  ) : (
+                    <Link href={navItem.link}>{navItem.name}</Link>
+                  )}
+                </Tab>
+              ))}
+            </TabList>
+          </TabGroup>
+        )}
       </div>
 
       <div className="mt-20">{children}</div>

@@ -53,6 +53,7 @@ specifiers:
   typescript: ^5.1.6
   unist-util-visit: ^4.1.2
   use-debounce: ^9.0.4
+  uuid: ^9.0.1
   vue: '>=3.3.4 <4.0.0'
 
 dependencies:
@@ -92,6 +93,7 @@ dependencies:
   tailwind-merge: 1.14.0
   unist-util-visit: 4.1.2
   use-debounce: 9.0.4_react@18.2.0
+  uuid: 9.0.1
   vue: 3.3.4
 
 devDependencies:
@@ -7052,6 +7054,11 @@ packages:
 
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: false
+
+  /uuid/9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
     dev: false
 

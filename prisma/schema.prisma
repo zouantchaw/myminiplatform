@@ -92,6 +92,16 @@ model Post {
   @@index([userId])
 }
 
+model NavigationItem {
+  id       String  @id @default(cuid())
+  name     String
+  link     String
+  editable Boolean
+  order    Int
+  site     Site    @relation(fields: [siteId], references: [id])
+  siteId   String
+}
+
 model Site {
   id            String   @id @default(cuid())
   name          String?
@@ -108,6 +118,7 @@ model Site {
   user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId        String?
   posts         Post[]
+  navigation     NavigationItem[]
 
   @@index([userId])
 }

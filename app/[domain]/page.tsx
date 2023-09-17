@@ -5,6 +5,7 @@ import { placeholderBlurhash, toDateString } from "@/lib/utils";
 import BlogCard from "@/components/blog-card";
 import { getPostsForSite, getSiteData } from "@/lib/fetchers";
 import Image from "next/image";
+import { TabGroup, TabList, Tab } from "@tremor/react";
 
 export default async function SiteHomePage({
   params,
@@ -93,7 +94,6 @@ export default async function SiteHomePage({
           </div>
         )}
       </div>
-
       {posts.length > 1 && (
         <div className="mx-5 mb-20 max-w-screen-xl lg:mx-24 2xl:mx-auto">
           <h2 className="mb-10 font-title text-4xl dark:text-white md:text-5xl">

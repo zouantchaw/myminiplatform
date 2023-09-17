@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { Post, Site } from "@prisma/client";
+import { Post, Site, NavigationItem } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 import { withPostAuth, withSiteAuth } from "./auth";
 import { getSession } from "@/lib/auth";
@@ -15,6 +15,15 @@ import {
 import { put } from "@vercel/blob";
 import { customAlphabet } from "nanoid";
 import { getBlurDataURL } from "@/lib/utils";
+
+interface NavigationItemInput {
+  name: string;
+  link: string;
+  editable: boolean;
+  order: number;
+  siteId?: string;  // optional because you're passing `siteId` separately
+}
+
 
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
@@ -426,4 +435,66 @@ export const editUser = async (
       };
     }
   }
+};
+
+export const createNavigationItem = async (siteId: string, navigationItem: NavigationItemInput): Promise<NavigationItem | { error: any }> => {
+  const { siteId: _, ...navigationItemWithoutSiteId } = navigationItem;
+  try {
+    const response = await prisma.navigationItem.create({
+      data: {
+        ...navigationItemWithoutSiteId,
+        site: {
+          connect: {
+            id: siteId,
+          },
+        },
+      },
+    });
+    return response;
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
+  }
+};
+
+
+export const updateNavigationItem = async (navigationItemId: string, updatedNavigationItem: NavigationItem) => {
+  try {
+    const response = await prisma.navigationItem.update({
+      where: {
+        id: navigationItemId,
+      },
+      data: {
+        ...updatedNavigationItem,
+      },
+    });
+    return response;
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
+  }
+};
+
+export const deleteNavigationItem = async (navigationItemId: string) => {
+  try {
+    const response = await prisma.navigationItem.delete({
+      where: {
+        id: navigationItemId,
+      },
+    });
+    return response;
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
+  }
+};
+
+export const getNavigationItemFromSiteId = async (siteId: string) => {
+  return await prisma.navigationItem.findMany({
+    where: { siteId: siteId },
+    orderBy: { order: 'asc' },
+  });
 };
